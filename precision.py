@@ -1,5 +1,7 @@
 import math
 
+# добавил локальный комментарий
+
 precision = float(input('Точность: '))
 result = 0
 i = 0
