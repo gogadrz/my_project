@@ -1,6 +1,7 @@
 import math
 
 # добавил локальный комментарий
+# this is local basket
 
 precision = float(input('Точность: '))
 result = 0
