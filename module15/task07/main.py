@@ -1,7 +1,9 @@
 def calculate_new_container_index(weight):
     for index in range(len(containers)):
         if containers[index] < weight:
-            return index
+            return index + 1
+
+    return len(containers) + 1
 
 
 def input_valid(number):
