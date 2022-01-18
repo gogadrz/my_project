@@ -12,7 +12,7 @@ full_path = os.path.abspath(file_name)
 print(full_path)
 
 # на уровень выше и в "Python_Basic" с именем файла
-full_path = os.path.abspath(os.path.join('..', 'Python_Basic', file_name))
+full_path = os.path.abspath(os.path.join('../..', 'Python_Basic', file_name))
 print(full_path)
 
 # разделитель. то есть в корень диска
@@ -49,5 +49,5 @@ parent_path_on_2_levels = os.path.abspath(
 print(parent_path)
 
 # ну или
-parent_path = os.path.abspath(os.path.join('..', 'file.txt'))
+parent_path = os.path.abspath(os.path.join('../..', 'file.txt'))
 print(parent_path)
