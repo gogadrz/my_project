@@ -1,69 +1,31 @@
-students = {
-
-    1: {
-
-        'name': 'Bob',
-
-        'surname': 'Vazovski',
-
-        'age': 23,
-
-        'interests': ['biology, swimming']
-
-    },
-
-    2: {
-
-        'name': 'Rob',
-
-        'surname': 'Stepanov',
-
-        'age': 24,
-
-        'interests': ['math', 'computer games', 'running']
-
-    },
-
-    3: {
-
-        'name': 'Alexander',
-
-        'surname': 'Krug',
-
-        'age': 22,
-
-        'interests': ['languages', 'health food']
-
-    }
-
-}
+import os
 
 
-def f(dict):
-    lst = []
+def search_file(cur_path, file_name):
+    print('Переходим в', cur_path)
 
-    string = ''
+    for i_elem in os.listdir(cur_path):
+        path = os.path.join(cur_path, i_elem)
+        print('    смотрим -', i_elem)
+        if file_name == i_elem:
+            return path
+        if os.path.isdir(path):
+            print('<DIR>', i_elem)
+            result = search_file(path, file_name)
+            if result:
+                break
+    else:
+        result = None
 
-    for i in dict:
-        lst += (dict[i]['interests'])
+    return result
 
-        string += dict[i]['surname']
+search_path = os.path.abspath(os.path.join(os.path.abspath(''), os.pardir, 'Python_Basic'))
+# search_path = os.path.join(os.path.sep, 'test')
+file_name = 'main.py'
 
-    cnt = 0
+result = search_file(search_path, file_name)
+if result:
+    print('полный путь к файлу: ', result)
+else:
+    print('в указанном пути файл не найден')
 
-    for s in string:
-        cnt += 1
-
-    return lst, cnt
-
-
-pairs = []
-
-for i in students:
-    pairs += (i, students[i]['age'])
-
-my_lst = f(students)[0]
-
-l = f(students)[1]
-
-print(my_lst, l)
