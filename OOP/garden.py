@@ -34,13 +34,3 @@ class PotatoGarden:
             print('Вся картошка созрела.')
         else:
             print('Картошка еще не созрела')
-
-
-my_garden = PotatoGarden(5)
-my_garden.are_all_ripe()
-my_garden.grow_all()
-my_garden.are_all_ripe()
-my_garden.grow_all()
-my_garden.are_all_ripe()
-my_garden.grow_all()
-my_garden.are_all_ripe()
