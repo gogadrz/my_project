@@ -1,25 +1,27 @@
-import random
+from students import Student
+import os
 
 
-class Student:
-
-    def __init__(self, name):
-        self.name = name
-        self.group_num = random.randint(1, 20)
-        self.scores = []
-        for _ in range(5):
-            self.scores.append(random.randint(3, 5))
-
-    def show_info(self):
-        print('ФИ: {}, группа №: {}, успеваемость: {}'.format(self.name, self.group_num, self.scores))
-        print('{}'.format(sum(self.scores) / len(self.scores)))
+def full_name(file_name):
+    return os.path.abspath(os.path.join(os.path.curdir, file_name))
 
 
-try:
-    with open('students.txt', 'r', encoding = 'utf-8') as in_file:
-        name_str = in_file.readline()
-except FileNotFoundError:
-    print('Файл {} не найден.'.format('students.txt'))
+def get_student_names(file_name):
+    try:
+        with open(full_name(file_name), 'r', encoding='utf-8') as in_file:
+            student_names = in_file.read()
+    except FileNotFoundError:
+        print('Файл {} не найден.'.format('students.txt'))
 
-unit01 = Student(name_str.strip())
-unit01.show_info()
+    return student_names
+
+
+def main(file_name):
+    student_names = get_student_names(file_name).split('\n')
+    students = [Student(index, student_names[index]) for index in range(10)]
+
+    for i_student in sorted(students, key=lambda student: student.GPA):
+        i_student.show_info(True)
+
+
+main('students.txt')
