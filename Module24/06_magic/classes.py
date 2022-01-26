@@ -1,10 +1,9 @@
 class Water:
-    answer = 'сложили два класса и вывели Воду.'
-    # def __init__(self, name = 'Вода'):
-    #     self.name = name
-    #
-    # def answer(self):
-    #    print('сложили два класса и вывели {}'.format(self.name))
+    def __init__(self, name='Вода'):
+        self.name = name
+
+    def answer(self):
+        print('сложили два класса и вывели {}'.format(self.name))
 
     def __add__(self, other):
         if isinstance(other, Air):
@@ -14,11 +13,11 @@ class Water:
         elif isinstance(other, Earch):
             return Dirt()
         else:
-            return None
+            return Error()
 
 
 class Air:
-    def __init__(self, name = 'Воздух'):
+    def __init__(self, name='Воздух'):
         self.name = name
 
     def answer(self):
@@ -30,11 +29,11 @@ class Air:
         elif isinstance(other, Earch):
             return Dust()
         else:
-            return None
+            return Error()
 
 
 class Fire:
-    def __init__(self, name = 'Огонь'):
+    def __init__(self, name='Огонь'):
         self.name = name
 
     def answer(self):
@@ -44,11 +43,11 @@ class Fire:
         if isinstance(other, Earch):
             return Lava()
         else:
-            return None
+            return Error()
 
 
 class Storm:
-    def __init__(self, name = 'Шторм'):
+    def __init__(self, name='Шторм'):
         self.name = name
 
     def answer(self):
@@ -56,7 +55,7 @@ class Storm:
 
 
 class Steam:
-    def __init__(self, name = 'Пар'):
+    def __init__(self, name='Пар'):
         self.name = name
 
     def answer(self):
@@ -64,7 +63,7 @@ class Steam:
 
 
 class Dirt:
-    def __init__(self, name = 'Грязь'):
+    def __init__(self, name='Грязь'):
         self.name = name
 
     def answer(self):
@@ -72,7 +71,7 @@ class Dirt:
 
 
 class Earch:
-    def __init__(self, name = 'Земля'):
+    def __init__(self, name='Земля'):
         self.name = name
 
     def answer(self):
@@ -80,7 +79,7 @@ class Earch:
 
 
 class Lightning:
-    def __init__(self, name = 'Молния'):
+    def __init__(self, name='Молния'):
         self.name = name
 
     def answer(self):
@@ -88,7 +87,7 @@ class Lightning:
 
 
 class Dust:
-    def __init__(self, name = 'Пыль'):
+    def __init__(self, name='Пыль'):
         self.name = name
 
     def answer(self):
@@ -96,8 +95,16 @@ class Dust:
 
 
 class Lava:
-    def __init__(self, name = 'Лава'):
+    def __init__(self, name='Лава'):
         self.name = name
 
     def answer(self):
         print('сложили два класса и вывели {}'.format(self.name))
+
+
+class Error:
+    def __init__(self, name='Ошибка'):
+        self.name = name
+
+    def answer(self):
+        print('Эти классы не складываются')

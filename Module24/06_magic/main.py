@@ -1,7 +1,10 @@
 from classes import *
 
-a = Fire()
-b = Water()
-
+a = Water()
+b = Fire()
 c = a + b
-print(b.answer)
+c.answer()
+
+a = Fire()
+c = a + b
+c.answer()
