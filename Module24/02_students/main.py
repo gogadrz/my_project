@@ -11,13 +11,17 @@ def get_student_names(file_name):
         with open(full_name(file_name), 'r', encoding='utf-8') as in_file:
             student_names = in_file.read()
     except FileNotFoundError:
-        print('Файл {} не найден.'.format('students.txt'))
+        print('Файл \'{}\' не найден.'.format(file_name))
+        return False
 
-    return student_names
+    return student_names.split('\n')
 
 
 def main(file_name):
-    student_names = get_student_names(file_name).split('\n')
+    student_names = get_student_names(file_name)
+    if not student_names:
+        return
+
     students = [Student(index, student_names[index]) for index in range(10)]
 
     for i_student in sorted(students, key=lambda student: student.GPA):

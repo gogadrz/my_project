@@ -17,8 +17,12 @@ class Student:
             self.group_num
         ), end='')
 
-        for i_scores in self.scores:
-            print(i_scores, end=', ')
+        for index, score in enumerate(self.scores):
+            print(score, end = '')
+
+            if index < len(self.scores) - 1:
+                print(',', end='')
+            print(' ', end='')
 
         if print_gpa:
             print(' средний балл: {}'.format(self.GPA), end='')
