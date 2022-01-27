@@ -45,10 +45,15 @@ class Home:
 
 class People:
     delta = 10
+    live_status = {
+        0: 'Прислонился к березе и дал дуба.',
+        1: 'Живее всех живых'
+                   }
 
-    def __init__(self, name, ate_state=50):
+    def __init__(self, name, ate_state=50, live=True):
         self.name = name
         self.ate_state = ate_state
+        self.live = live
         self.home = []
 
     def add_house(self, house):
@@ -60,10 +65,14 @@ class People:
 
     def to_work(self):
         self.ate_state -= self.delta
+        if self.ate_state < 0:
+            self.live = False
         self.home[0].add_money(self.delta)
 
     def to_play(self):
         self.ate_state -= self.delta
+        if self.ate_state < 0:
+            self.live = False
 
     def to_go_to_shop(self):
         self.home[0].add_foods(self.delta)
@@ -75,24 +84,16 @@ class People:
             self.ate_state
         ))
         self.home[0].home_info()
+        print(self.live_status[self.live])
 
+    def is_live(self):
+        return self.live
 
-my_house = Home()
-man = People('Артем')
-women = People('Аглафея')
+    def what_is_to_eat(self):
+        return self.ate_state
 
-man.add_house(my_house)
-women.add_house(my_house)
+    def how_much_foods(self):
+        return self.home[0].left_foods()
 
-man.info()
-print()
-women.info()
-print('-------теперь Акакий поел-----')
-man.to_eat()
-man.info()
-women.info()
-print('------Аглафея поработала')
-women.to_work()
-man.info()
-women.info()
-
+    def how_much_money(self):
+        return self.home[0].left_money()
