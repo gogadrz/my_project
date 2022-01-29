@@ -1,4 +1,8 @@
 class Water:
+
+    def __str__(self):
+        return 'class Water'
+
     def __init__(self, name='Вода'):
         self.name = name
 
@@ -17,6 +21,9 @@ class Water:
 
 
 class Air:
+    def __str__(self):
+        return 'class Air'
+
     def __init__(self, name='Воздух'):
         self.name = name
 
@@ -33,6 +40,9 @@ class Air:
 
 
 class Fire:
+    def __str__(self):
+        return 'class Fire'
+
     def __init__(self, name='Огонь'):
         self.name = name
 
@@ -47,6 +57,9 @@ class Fire:
 
 
 class Storm:
+    def __str__(self):
+        return 'class Storm'
+
     def __init__(self, name='Шторм'):
         self.name = name
 
@@ -55,6 +68,9 @@ class Storm:
 
 
 class Steam:
+    def __str__(self):
+        return 'class Steam'
+
     def __init__(self, name='Пар'):
         self.name = name
 
@@ -63,6 +79,9 @@ class Steam:
 
 
 class Dirt:
+    def __str__(self):
+        return 'class Dirt'
+
     def __init__(self, name='Грязь'):
         self.name = name
 
@@ -71,6 +90,9 @@ class Dirt:
 
 
 class Earch:
+    def __str__(self):
+        return 'class Earch'
+
     def __init__(self, name='Земля'):
         self.name = name
 
@@ -79,6 +101,9 @@ class Earch:
 
 
 class Lightning:
+    def __str__(self):
+        return 'class Lighting'
+
     def __init__(self, name='Молния'):
         self.name = name
 
@@ -87,6 +112,9 @@ class Lightning:
 
 
 class Dust:
+    def __str__(self):
+        return 'class Dust'
+
     def __init__(self, name='Пыль'):
         self.name = name
 
@@ -95,6 +123,9 @@ class Dust:
 
 
 class Lava:
+    def __str__(self):
+        return 'class Lava'
+
     def __init__(self, name='Лава'):
         self.name = name
 
@@ -103,6 +134,9 @@ class Lava:
 
 
 class Error:
+    def __str__(self):
+        return 'class Error'
+
     def __init__(self, name='Ошибка'):
         self.name = name
 
