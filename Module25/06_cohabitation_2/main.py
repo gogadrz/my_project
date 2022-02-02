@@ -95,8 +95,8 @@ def live_the_day(husband, wife, child, cats, house, report):
             print('{child:<10}испортил подгузник'.format(child=child.get_name()))
         else:
             child.play()
-            wife.set_happiness(20)
-            husband.set_happiness(10)
+            wife.set_happiness(5)
+            husband.set_happiness(5)
             print('{child:<10}поиграл'.format(child=child.get_name()))
 
     print()
@@ -147,10 +147,13 @@ class People:
         if self.__alive:
             self.__happiness += value
             if self.__happiness < 10:
-                self.__alive = False
-                self.__ate_state = 0
-                self.__happiness = 0
-                self.__home.clear()
+                self.death()
+
+    def death(self):
+        self.__alive = False
+        self.__ate_state = 0
+        self.__happiness = 0
+        self.__home.clear()
 
     def get_home(self):
         if self.__alive:
@@ -346,6 +349,8 @@ class House:
 
     def set_money(self, value):
         self.__money_in_nightstand += value
+        if self.__money_in_nightstand < 0:
+            self.__money_in_nightstand = 0
 
     def info(self):
         print('\n{home:<10}Деньги: {money}, Еда: {food}, Кошачья еда: {pet_food}, '
