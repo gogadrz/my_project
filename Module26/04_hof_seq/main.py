@@ -1,26 +1,28 @@
 from collections.abc import Iterable
 
 
-class HofstadterSequence:
-    def __init__(self, s: list):
-        self.s = s[:]
+def hofstadter_sequence(s: list, count_print: int) -> Iterable[int]:
+    s = s[:]
 
-    def __next__(self) -> Iterable[int]:
-        try:
-            q = self.s[-self.s[-1]] + self.s[-self.s[-2]]
-            self.s.append(q)
-            return q
-        except IndexError:
-            raise StopIteration()
+    try:
 
-    def __iter__(self):
-        return self
+        if s == [1, 2]:
+            return
 
-    # def current_state(self):
-    #     return self.s
+        for index in range(count_print):
+            q = s[-s[-1]] + s[-s[-2]]
+            s.append(q)
+            yield q
+
+    except IndexError:
+        return
 
 
-seq = HofstadterSequence([1, 1])
+def main():
+    seq = hofstadter_sequence(s=[1, 1], count_print=20)
 
-for _ in range(10):
-    print(next(seq), end=' ')
+    for x in seq:
+        print(x, end=' ')
+
+
+main()
