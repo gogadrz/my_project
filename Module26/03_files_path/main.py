@@ -9,30 +9,38 @@ def gen_files_path(seek_dir_name: str, start_path: str = None) -> Iterable[str]:
         cur_path = os.path.abspath(os.path.join(start_path, item_name))
 
         if os.path.isdir(cur_path):
-            if item_name.lower() == seek_dir_name:
-                result = '\nКаталог найден.\nПолный путь: {directory}'.format(directory = cur_path)
-                print(result)
-                return
-            else:
-                ftype = '<DIR>  '
+            yield start_path, item_name
+
+            try:
+                yield from gen_files_path(seek_dir_name=seek_dir_name, start_path=cur_path)
+            except PermissionError:
+                print('PermissionError: {}'.format(cur_path))
+
+
+def seek_dir(seek_dir_name: str, start_path: str = None) -> None:
+    gen_flist = gen_files_path(seek_dir_name, start_path)
+
+    for i_path, i_name in gen_flist:
+        full_path = os.path.abspath(os.path.join(i_path, i_name))
+
+        if i_name == seek_dir_name:
+            print('\nДиректория {dir_name} найдена.\nПолный путь: {full_dir_name}'.format(
+                dir_name=i_name,
+                full_dir_name=full_path
+            ))
+
+            return
+
         else:
-            ftype = '<file> '
-
-        ftype_path = ftype + cur_path
-
-        yield ftype_path
-
-    print('Каталог не найден.')
-    return False
+            print(full_path)
 
 
 def main():
-    seek_dir = input('Введите имя Директории для поиска: ').lower()
 
-    gen_flist = gen_files_path(seek_dir_name = seek_dir)
+    seek_name = input('Введите имя Директории для поиска: ').lower()
+    print()
 
-    for i_file in gen_flist:
-        print(i_file)
+    seek_dir(seek_dir_name=seek_name, start_path=None)
 
 
 main()
