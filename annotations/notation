@@ -1,0 +1,3 @@
+В задании 4 если хотите указать в нотации тип в Iterable, то используйте 
+
+from typing import  Iterable
