@@ -1,4 +1,4 @@
-from collections.abc import Iterable
+from typing import Iterable
 
 
 def hofstadter_sequence(s: list, count_print: int) -> Iterable[int]:
