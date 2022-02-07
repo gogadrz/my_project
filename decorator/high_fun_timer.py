@@ -1,5 +1,6 @@
 import time
 from typing import Callable, Any
+import functools
 
 
 def timer(func: Callable) -> Callable:
@@ -8,6 +9,7 @@ def timer(func: Callable) -> Callable:
     которое заняло выполнение декорируемой функции.
     """
 
+    @functools.wraps(func)
     def wrapped_func(*args, **kwargs) -> Any:
         started_at = time.time()
         result = func(*args, **kwargs)
@@ -26,6 +28,7 @@ def logging(func: Callable) -> Callable:
     Декоратор логирующий работу кода
     """
 
+    @functools.wraps(func)
     def wrapped_func(*args, **kwargs) -> Any:
 
         print('Вызывается функция {func}\n'
@@ -77,3 +80,7 @@ print(my_sum)
 
 my_cubes_sum = cubes_sum(200)
 print(my_sum)
+
+print(logging.__doc__)
+print(squares_sum.__name__)
+
