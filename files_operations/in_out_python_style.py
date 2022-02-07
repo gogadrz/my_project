@@ -9,8 +9,10 @@ def line_analysis(line):
         res = int(line.strip())
     return res
 
+
 def get_file_path(file_name):
     return os.path.abspath(os.path.join('.', file_name))
+
 
 def get_lines(file_name):
     file_path = get_file_path(file_name)
@@ -27,6 +29,7 @@ def output(result, file_name):
     with open(file_path, 'w') as output_file:
         output_file.write(str(result))
 
+
 def main(input_filename, output_filename):
     result = 0
 
@@ -34,5 +37,6 @@ def main(input_filename, output_filename):
         result += line_analysis(line)
 
     output(result, output_filename)
+
 
 main('numbers.txt', 'answer.txt')
