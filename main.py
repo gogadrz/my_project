@@ -1,25 +1,58 @@
-def get_new_price(percent, price):
-    if percent == 0:
-        return price
-    else:
-        return round(price * (1 + percent / 100), 2)
+class Robot:
+    def __init__(self, model):
+        self.__model = model
+
+    def say(self):
+        print('Я робот {}!'.format(self.__model))
 
 
-price_list = [1.09, 23.56, 57.84, 4.56, 6.78]
-first_year_percent = 0
-second_year_percent = 10
+class CanFly:
+    def __init__(self, height, speed):
+        self.__height = height
+        self.__speed = speed
 
-first_year_prices = [get_new_price(first_year_percent, price) for price in price_list]
-second_year_prices = [get_new_price(second_year_percent, price) for price in first_year_prices]
+    def take_off(self):
+        self.__height = 50
+        print('Взлетаю')
 
-print(first_year_prices)
-print(second_year_prices)
-print(round(sum(price_list), 2), round(sum(first_year_prices), 2), round(sum(second_year_prices), 2))
+    def fly(self):
+        self.__speed = 160
+        print('Лечу')
+
+    def landing(self):
+        self.__height = 0
+        self.__speed = 0
+        print('Приземляюсь')
 
 
+class ReconnaissanceDrone(Robot, CanFly):
+    def operate(self):
+        self.fly()
+        print('Веду разведку с воздуха')
+
+    def say(self):
+        super(ReconnaissanceDrone, self).say()
+        print('sdf')
 
 
+class WarDrone(Robot, CanFly):
+    def __init__(self, model, weapon):
+        super().__init__(model)
+        self.__weapon = weapon
+
+    def operate(self):
+        print('Защищаю объект с воздуха, с помощью {}'.format(self.__weapon))
 
 
+def main():
+    rob = ReconnaissanceDrone('Putin')
+    rob.say()
+    rob.take_off()
+    rob.operate()
+    rob2 = WarDrone('Medvedev', 'rogatka')
+    rob2.say()
+    rob2.landing()
+    rob2.operate()
 
-# Сумма цен за каждый год: 93.83 93.83 103.22
+
+main()
