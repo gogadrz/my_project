@@ -4,11 +4,20 @@ from abc import ABC, abstractmethod
 class Transport(ABC):
     def __init__(self, color, speed):
         self.__color = color
-        self.__speed = speed
+        self._speed = speed
 
     @abstractmethod
     def move(self):
-        print('abs_moving')
+        speed += 10
+        print('abs_moving, speed = {}'.format(self.speed))
+
+    @property
+    def speed(self):
+        return self._speed
+
+    @speed.setter
+    def speed(self, value):
+        self._speed = value
 
     def signal(self):
         print('bi-bi')
@@ -39,6 +48,7 @@ class Boat(Transport):
 
 class Amphibian(Transport, AudioMixin):
     def move(self):
+
         print('Амфибия и плывет и едет!')
 
 
@@ -52,6 +62,8 @@ brdm = Amphibian('Green', 15)
 brdm.move()
 brdm.play_music()
 brdm.stop_music()
+print(brdm.get_speed())
+
 
 
 
