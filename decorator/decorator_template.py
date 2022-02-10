@@ -4,6 +4,7 @@ import functools
 
 def decorator(func: Callable) -> Callable:
 
+    # Что бы можно было получать информацию о декорируемой функции, используем @functools.wraps(имя функции)
     @functools.wraps(func)
     def wrapped_func(*args, **kwargs) -> Any:
 
