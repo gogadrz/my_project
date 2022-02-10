@@ -14,7 +14,7 @@ class File:
 
 
 def main():
-    with File('example.txt', 'w') as file:
+    with File('../example.txt', 'w') as file:
         file.write('Всем привет!')
 
     if file.closed:
