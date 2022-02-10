@@ -1,10 +1,11 @@
-import math
+import datetime
 
-base = 9
-height = 6
+# = datetime.date(2022, 2, 10)
 
-side = math.sqrt((base / 2) ** 2 + height ** 2)
-print(side)
+date_str = '10-02-2022'
 
-perimetr = base + side + side
-print(perimetr)
+full_date = datetime.datetime.strptime(date_str, '%d-%m-%Y')
+print(full_date.day)
+print(full_date.month)
+print(full_date.year)
+
