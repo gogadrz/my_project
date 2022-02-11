@@ -29,6 +29,7 @@ def for_all_method(decorator: Callable) -> Callable:
     @functools.wraps(decorator)
     def decorate(cls):
         for i_method in dir(cls):
+
             if i_method.startswith('__') is False:
                 cur_method = getattr(cls, i_method)
                 decorated_method = decorator(cur_method)
@@ -37,7 +38,6 @@ def for_all_method(decorator: Callable) -> Callable:
         return cls
 
     return decorate
-
 
 
 @create_time
