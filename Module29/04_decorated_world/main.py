@@ -8,7 +8,9 @@ def decorator_with_args_for_any_decorator(decorator_to_enhance: Callable) -> Cal
     def decorator_maker(*args, **kwargs) -> Callable:
         def decorator_wrapper(func: Callable) -> Callable:
             return decorator_to_enhance(func, *args, **kwargs)
+
         return decorator_wrapper
+
     return decorator_maker
 
 
@@ -20,6 +22,7 @@ def decorated_decorator(func: Callable, *dec_args, **dec_kwargs) -> Callable:
     def wrapper(*func_args, **func_kwargs) -> Callable:
         print('Переданные в декоратор арги и кварги: {} {}'.format(dec_args, dec_kwargs))
         return func(*func_args, **func_kwargs)
+
     return wrapper
 
 
@@ -30,4 +33,3 @@ def decorated_function(text: str, num: int) -> None:
 
 
 decorated_function("Юзер", 101)
-

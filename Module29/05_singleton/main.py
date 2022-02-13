@@ -2,7 +2,8 @@ import functools
 
 
 def singleton(cls):
-    """ Декоратор класса. Превращает класс в синглтон (может иметьтолько один инстанс """
+    """ Декоратор класса. Превращает класс в синглтон (может иметь только один инстанс) """
+
     @functools.wraps(cls)
     def wrapper_singleton(*args, **kwargs):
         if not wrapper_singleton.instance:
@@ -10,7 +11,7 @@ def singleton(cls):
 
         return wrapper_singleton.instance
 
-    wrapper_singleton.instance = None     # кэш
+    wrapper_singleton.instance = None  # кэш
     return wrapper_singleton
 
 

@@ -10,13 +10,14 @@ class app:
     В классе всего один странный метод get, принимающий параметр,
     который он никак не использует
     """
+
     @classmethod
     def get(cls, param: str) -> Callable:
         return example
 
 
 def callback(param: str) -> Callable:
-    """ Декоратор с параметром, который ничего не делает """
+    """ Декоратор с параметром, ничего не делает """
 
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
