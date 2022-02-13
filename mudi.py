@@ -1,19 +1,17 @@
-from datetime import datetime
+bon = 11
 
 
-f_str = "b d Y - H:M:S"
-dt, tm = f_str.split(' - ')
+def f():
+    bon = 3
+    print('1 inside f()', bon)
 
-month, day, year = map(str, dt.split())
-hours, minutes, secs = map(str, tm.split(':'))
-now = datetime.now()
+    def d():
+        # print('inside d()', bon)
+        nonlocal bon
+        bon = 5
+    d()
 
-str_format = '%{month} %{day} %{year} - %{hours}:%{minutes}:%{secs}'.format(
-    month=month,
-    day=day,
-    year=year,
-    hours=hours,
-    minutes=minutes,
-    secs=secs
-)
-print(now.strftime(str_format))
+    print('2 inside f()', bon)
+
+
+f()
