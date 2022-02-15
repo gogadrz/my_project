@@ -5,7 +5,7 @@ def can_be_poly(in_string: str) -> bool:
     counter = 0
     sym = collections.Counter(list(in_string))
 
-    for _, value in sym.items():
+    for value in sym.values():
         if value % 2 != 0:
             counter += 1
 
