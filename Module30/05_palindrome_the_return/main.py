@@ -1,4 +1,17 @@
+import collections
+
+
 def can_be_poly(in_string: str) -> bool:
+    counter = 0
+    sym = collections.Counter(list(in_string))
+
+    for _, value in sym.items():
+        if value % 2 != 0:
+            counter += 1
+
+        if counter > 1:
+            return False
+
     return True
 
 
