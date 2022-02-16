@@ -8,6 +8,10 @@ def main() -> None:
     results = [(strings[i], numbers[i]) for i in range(min(len(strings), len(numbers)))]
     print(results)
 
+    # лучше так
+    results2 = list(map(lambda x, y: (x, y), strings, numbers))
+    print(results2)
+
 
 if __name__ == '__main__':
     main()
