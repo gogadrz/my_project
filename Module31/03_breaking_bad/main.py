@@ -19,8 +19,12 @@ def main(json_filename: str) -> None:
             max_deaths['episode'] = data_episodes[index]['episode']
             max_deaths['number_of_deaths'] = data_episodes[index]['number_of_deaths']
 
-    info_str: str = 'Максимальное количество смертей:\nСезон: {season}, Эпизод: {episode}, Количество смертей: {deaths}'.format(
-        season = max_deaths['season'], episode = max_deaths['episode'], deaths = max_deaths['number_of_deaths'])
+    info_str: str = 'Максимальное количество смертей:\n' \
+                    'Сезон: {season}, Эпизод: {episode}, Количество смертей: {deaths}'.format(
+                        season=max_deaths['season'],
+                        episode=max_deaths['episode'],
+                        deaths=max_deaths['number_of_deaths']
+    )
 
     print(info_str)
 
