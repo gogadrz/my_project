@@ -2,8 +2,8 @@ import telebot
 import json
 
 # def main() -> None:
-
-token = '5235302158:AAFNCdbTixqPCYK9a62GSwox7FsSxqBLufw'
+with open('token', 'r') as file:
+    token = file.read()
 
 bot = telebot.TeleBot(token, parse_mode = None)
 
