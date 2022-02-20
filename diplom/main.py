@@ -1,44 +1,133 @@
 import telebot
+import os
+from typing import ClassVar
+from lowprice import lowprice
+from highprice import highprice
+from bestdeal import bestdeal
+from history import history
 
 
-def main():
-    done = False
+def get_full_file_name(file_name: str) -> str:
+    """
+    Функция возвращает полный путь по имени файла
 
-    with open('token', 'r') as file:
-        token = file.read()
-    bot = telebot.TeleBot(token, parse_mode = None)
+    :param file_name: имя файла
+    :type file_name: str
 
-    @bot.message_handler(commands = ['start', 'help'])
-    def start_message(message):
-        bot.send_message(message.chat.id, "Hi bro... :)")
-        print('start, help', message)
+    :return: полный путь к файлу
+    :rtype: str
+    """
+    return os.path.abspath(os.path.join(os.path.curdir, file_name))
 
-    @bot.message_handler(commands = ['exit'])
-    def start_message(message):
-        bot.send_message(message.chat.id, "Пока")
 
-        print('command = exit. Пока', message.text)
-        nonlocal done
-        done = True
-        bot.stop_polling()
-        # bot.infinity_polling(skip_pending = True)
-        exit(0)
+def get_token(file_name: str) -> str:
+    """
+    Функция возвращает токен бота.
+    Токен хранится в текстовом файле 'token'.
+    Если файл не существует, возвращается пустая строка.
 
-    # @bot.message_handler(func=lambda m: True)
-    @bot.message_handler(content_types = 'text')
-    def echo_all(message):
-        # bot.reply_to(message, message.text)
-        answer_str = 'bot answer: ' + message.text
+    :param file_name: имя файла
+    :type file_name: str
+
+    :return: токен
+    :rtype: str
+
+    """
+    full_file_name = get_full_file_name(file_name)
+
+    if not os.path.exists(full_file_name):
+        print('Файл {f_name} (содержащий токен) не найден.'.format(f_name=file_name))
+        return ''
+
+    with open(full_file_name, 'r') as file:
+        return file.read()
+
+
+def main(file_name: str) -> None:
+
+    token: str = get_token(file_name)
+
+    # Нет токена, нет смысла продолжать.
+    if token == '':
+        return
+
+    bot: ClassVar = telebot.TeleBot(token, parse_mode=None)
+
+    @bot.message_handler(commands=['hello-world'])
+    def hello_world_message(message: ClassVar) -> None:
+        """
+        Функция-обработчик команды /hello-world
+        Просто пишет приветствие со смайликом
+
+        :param message: данные сообщения
+        :type message: telebot.types.Message
+        """
+        answer_str = 'Привет {u_name} {smile}\nОтвет из команды /hello-world'.format(
+            u_name=message.from_user.first_name,
+            smile=U'\U0001F44C'
+        )
+
+        print(answer_str)
         bot.send_message(message.chat.id, answer_str)
 
-        print('function: echo_all()')
-        # for key, value in message.items():
-        #     print(key, value)
-        print(message.from_user.username)  # print(message['content_type'])
+    @bot.message_handler(commands=['help'])
+    def help(message: ClassVar) -> None:
+        """
+        Функция-обработчик команды /help
+        Выводит список доступных команд и краткое описание.
 
-        # bot.infinity_polling(skip_pending = False)
+        :param message: данные сообщения
+        :type message: telebot.types.Message
+        """
+        answer_str = "Здесь будет справка по командам.\n\n" \
+                     "/hello-world - приветствие со смайликом\n" \
+                     "/lowprice    - заглушка\n" \
+                     "/highprice   - заглушка\n" \
+                     "/bestdeal    - заглушка\n" \
+                     "/history     - заглушка\n\n" \
+                     "Если написать в чат 'привет', бот поздоровается в ответ."
+        print(answer_str)
+        bot.send_message(message.chat.id, answer_str)
 
-    while not done:
+    @bot.message_handler(commands=['lowprice'])
+    def low_price(message: ClassVar) -> None:
+        lowprice(message=message, bot=bot)
+
+    @bot.message_handler(commands=['highprice'])
+    def high_price(message: ClassVar) -> None:
+        highprice(message=message, bot=bot)
+
+    @bot.message_handler(commands=['bestdeal'])
+    def best_deal(message: ClassVar) -> None:
+        bestdeal(message=message, bot=bot)
+
+    @bot.message_handler(commands=['history'])
+    def hist(message: ClassVar) -> None:
+        history(message=message, bot=bot)
+
+    @bot.message_handler(content_types='text')
+    def listen_all(message: ClassVar) -> None:
+        """
+        Функция отвечает на фразу 'привет' в тексте сообщения.
+        Если получена фраза 'привет',
+        здоровается в ответ, со смайликом.
+
+        :param message: данные сообщения.
+        :type message: telebot.types.Message
+        """
+
+        if message.text == 'привет':
+            answer_str = 'Привет {u_name} {smile}'.format(
+                u_name=message.from_user.first_name,
+                smile=U'\U0001F600'
+            )
+        # else:
+        #     answer_str = ' - You wrote: ' + message.text
+
+            print(answer_str)
+            bot.send_message(message.chat.id, answer_str)
+
+    while True:
         try:
             bot.polling()
         except Exception as exc:
@@ -47,4 +136,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main('token')
